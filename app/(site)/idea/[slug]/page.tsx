@@ -1,0 +1,48 @@
+import { notFound } from "next/navigation";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+import { BottomNav, PageHero } from "@/components/Layout";
+import { getAllIdeaSlugs, getCategoryBySlug, getIdeaBySlug } from "@/lib/data";
+
+export const revalidate = 0;
+
+export async function generateStaticParams() {
+  const slugs = await getAllIdeaSlugs();
+  return slugs.map((slug) => ({ slug }));
+}
+
+export default async function IdeaPage({ params }: { params: { slug: string } }) {
+  const idea = await getIdeaBySlug(params.slug);
+  if (!idea) return notFound();
+
+  const category = await getCategoryBySlug(idea.categorySlug);
+
+  return (
+    <>
+      <PageHero title={idea.title} backHref={`/category/${idea.categorySlug}`} />
+      <div className="section" style={{ paddingTop: 20 }}>
+        {idea.imageUrl ? (
+          <div className="article-hero-image" style={{ backgroundImage: `url(${idea.imageUrl})` }} />
+        ) : (
+          <div className="article-hero-icon">{idea.icon}</div>
+        )}
+        <span className={`badge ${idea.tagColor}`}>{idea.tag}</span>
+        {category && (
+          <p className="card-desc" style={{ marginTop: 6 }}>
+            {category.icon} {category.name}
+          </p>
+        )}
+        <div className="article-meta">
+          <span>📊 Profit Potential</span>
+          <span className={`profit ${idea.profitPotential.toLowerCase()}`}>{idea.profitPotential}</span>
+          <span className="divider">|</span>
+          <span>{idea.investmentRange}</span>
+        </div>
+        <div className="article-body">
+          <ReactMarkdown remarkPlugins={[remarkGfm]}>{idea.content}</ReactMarkdown>
+        </div>
+      </div>
+      <BottomNav active="Categories" />
+    </>
+  );
+}
