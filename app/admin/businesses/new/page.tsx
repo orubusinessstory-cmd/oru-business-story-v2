@@ -49,11 +49,8 @@ export default async function NewBusinessPage() {
         <label>Investment Range (e.g. "₹ 1 – 3 Lakhs")</label>
         <input type="text" name="investment_range" required />
 
-        <label>Photo (optional — shown instead of the emoji icon if uploaded)</label>
+        <label>Photo (shown on the card and article page)</label>
         <input type="file" name="image" accept="image/*" />
-
-        <label>Icon (used only if no photo is uploaded — a single emoji, e.g. 🚗)</label>
-        <input type="text" name="icon" required />
 
         <div className="admin-checkbox-row">
           <input type="checkbox" name="featured" id="featured" />

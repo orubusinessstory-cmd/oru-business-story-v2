@@ -75,9 +75,6 @@ export default async function EditBusinessPage({ params }: { params: { slug: str
         <input type="file" name="image" accept="image/*" />
         <input type="hidden" name="existing_image_url" value={idea.image_url ?? ""} />
 
-        <label>Icon (used only if no photo is uploaded)</label>
-        <input type="text" name="icon" defaultValue={idea.icon} required />
-
         <div className="admin-checkbox-row">
           <input type="checkbox" name="featured" id="featured" defaultChecked={idea.featured} />
           <label htmlFor="featured" style={{ marginBottom: 0 }}>
