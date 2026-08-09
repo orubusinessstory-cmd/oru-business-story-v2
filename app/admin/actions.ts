@@ -155,12 +155,19 @@ export async function deleteIdea(slug: string) {
 
 // ---------- Videos ----------
 
+function extractYouTubeThumbnail(url: string): string | null {
+  const match = url.match(/(?:youtube\.com\/(?:watch\?v=|embed\/|shorts\/)|youtu\.be\/)([a-zA-Z0-9_-]{11})/);
+  const id = match ? match[1] : null;
+  return id ? `https://img.youtube.com/vi/${id}/hqdefault.jpg` : null;
+}
+
 export async function createVideo(formData: FormData) {
   const supabase = createClient();
+  const youtubeUrl = String(formData.get("youtube_url")).trim();
   const { error } = await supabase.from("videos").insert({
     title: String(formData.get("title")).trim(),
-    youtube_url: String(formData.get("youtube_url")).trim(),
-    thumbnail_url: String(formData.get("thumbnail_url") || "").trim() || null,
+    youtube_url: youtubeUrl,
+    thumbnail_url: extractYouTubeThumbnail(youtubeUrl),
   });
   if (error) throw new Error(error.message);
 
@@ -171,12 +178,13 @@ export async function createVideo(formData: FormData) {
 
 export async function updateVideo(id: string, formData: FormData) {
   const supabase = createClient();
+  const youtubeUrl = String(formData.get("youtube_url")).trim();
   const { error } = await supabase
     .from("videos")
     .update({
       title: String(formData.get("title")).trim(),
-      youtube_url: String(formData.get("youtube_url")).trim(),
-      thumbnail_url: String(formData.get("thumbnail_url") || "").trim() || null,
+      youtube_url: youtubeUrl,
+      thumbnail_url: extractYouTubeThumbnail(youtubeUrl),
     })
     .eq("id", id);
   if (error) throw new Error(error.message);

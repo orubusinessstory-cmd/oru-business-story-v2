@@ -23,9 +23,9 @@ export default async function EditVideoPage({ params }: { params: { id: string }
 
         <label>YouTube Video Link</label>
         <input type="url" name="youtube_url" defaultValue={video.youtube_url} required />
-
-        <label>Thumbnail Image URL (optional)</label>
-        <input type="url" name="thumbnail_url" defaultValue={video.thumbnail_url ?? ""} />
+        <p className="admin-hint">
+          The thumbnail is pulled automatically from the video — no need to add one yourself.
+        </p>
 
         <div className="admin-form-actions">
           <button type="submit" className="admin-btn-primary">
