@@ -1,3 +1,4 @@
+import "./notifications.css";
 import "./menu-drawer.css";
 import "./profile.css";
 import "./favorites-button.css";

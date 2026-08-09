@@ -1,7 +1,8 @@
 import Link from "next/link";
-import { BellIcon, NavIcons } from "./Icons";
+import { NavIcons } from "./Icons";
 import FavoriteButton from "./FavoriteButton";
 import MenuDrawer from "./MenuDrawer";
+import NotificationsBell from "./NotificationsBell";
 import type { BusinessIdea } from "@/lib/data";
 
 export function Header() {
@@ -12,9 +13,7 @@ export function Header() {
         <div className="oru">Oru</div>
         <div className="sub">BUSINESS STORY</div>
       </Link>
-      <button className="icon-btn bell-dot" aria-label="Notifications">
-        <BellIcon />
-      </button>
+      <NotificationsBell />
     </div>
   );
 }
