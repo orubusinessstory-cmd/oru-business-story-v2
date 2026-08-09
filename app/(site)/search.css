@@ -1,0 +1,10 @@
+.search-bar-page {
+  border: 1px solid var(--border);
+  margin-top: 4px;
+}
+
+.search-count {
+  padding: 0 20px 6px;
+  font-size: 13px;
+  color: var(--gray-500);
+}

@@ -45,13 +45,13 @@ export default async function HomePage() {
           Business Ideas
         </h1>
         <p className="hero-sub">Real ideas. Real opportunities. Real success.</p>
-        <div className="search-bar">
+        <form action="/search" method="get" className="search-bar">
           <SearchIcon />
-          <input type="text" placeholder="Search business ideas, industries..." />
-          <button className="filter-btn" aria-label="Filters">
+          <input type="search" name="q" placeholder="Search business ideas, industries..." />
+          <button type="button" className="filter-btn" aria-label="Filters">
             <FilterIcon />
           </button>
-        </div>
+        </form>
       </div>
 
       <div className="section">

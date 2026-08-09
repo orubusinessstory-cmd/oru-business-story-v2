@@ -90,6 +90,21 @@ export async function getIdeasByCategory(categorySlug: string): Promise<Business
   return (data ?? []).map(mapIdea);
 }
 
+export async function searchIdeas(query: string): Promise<BusinessIdea[]> {
+  const q = query.trim();
+  if (!q) return [];
+  const { data, error } = await supabase
+    .from("ideas")
+    .select("*")
+    .or(`title.ilike.%${q}%,description.ilike.%${q}%,tag.ilike.%${q}%`)
+    .order("created_at", { ascending: false });
+  if (error) {
+    console.error("searchIdeas error:", error.message);
+    return [];
+  }
+  return (data ?? []).map(mapIdea);
+}
+
 export async function getFeaturedIdeas(): Promise<BusinessIdea[]> {
   const { data, error } = await supabase
     .from("ideas")
