@@ -85,6 +85,19 @@ export async function getFeaturedIdeas(): Promise<BusinessIdea[]> {
   return (data ?? []).map(mapIdea);
 }
 
+export async function getLatestIdeas(limit: number = 6): Promise<BusinessIdea[]> {
+  const { data, error } = await supabase
+    .from("ideas")
+    .select("*")
+    .order("created_at", { ascending: false })
+    .limit(limit);
+  if (error) {
+    console.error("getLatestIdeas error:", error.message);
+    return [];
+  }
+  return (data ?? []).map(mapIdea);
+}
+
 export async function getIdeaBySlug(slug: string): Promise<BusinessIdea | null> {
   const { data, error } = await supabase.from("ideas").select("*").eq("slug", slug).single();
   if (error) {

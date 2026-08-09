@@ -1,12 +1,16 @@
 import Link from "next/link";
 import { Header, BottomNav, IdeaCard } from "@/components/Layout";
 import { FilterIcon, GridIcon, SearchIcon } from "@/components/Icons";
-import { getCategories, getFeaturedIdeas } from "@/lib/data";
+import { getCategories, getFeaturedIdeas, getLatestIdeas } from "@/lib/data";
 
 export const revalidate = 0;
 
 export default async function HomePage() {
-  const [categories, featured] = await Promise.all([getCategories(), getFeaturedIdeas()]);
+  const [categories, featured, latest] = await Promise.all([
+    getCategories(),
+    getFeaturedIdeas(),
+    getLatestIdeas(3),
+  ]);
 
   return (
     <>
@@ -69,6 +73,31 @@ export default async function HomePage() {
             </Link>
           ))}
         </div>
+      </div>
+
+      <div className="section">
+        <div className="section-head">
+          <h2>Latest Ideas</h2>
+        </div>
+      </div>
+      <div className="latest-scroll">
+        {latest.map((idea) => (
+          <Link key={idea.slug} href={`/idea/${idea.slug}`} className="latest-card">
+            {idea.imageUrl ? (
+              <div className="latest-thumb" style={{ backgroundImage: `url(${idea.imageUrl})` }} />
+            ) : (
+              <div className="latest-thumb latest-thumb-icon">{idea.icon}</div>
+            )}
+            <p className="latest-title">{idea.title}</p>
+            <span className={`badge ${idea.tagColor}`} style={{ marginBottom: 0 }}>
+              {idea.tag}
+            </span>
+          </Link>
+        ))}
+        <Link href="/categories" className="latest-card latest-view-all">
+          <span className="latest-view-all-arrow">→</span>
+          <p className="latest-title">View All</p>
+        </Link>
       </div>
 
       <div className="section">

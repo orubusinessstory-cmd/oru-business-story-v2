@@ -1,0 +1,73 @@
+/* Latest Ideas — swipeable horizontal row */
+
+.latest-scroll {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  padding: 6px 20px 22px;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+
+.latest-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.latest-card {
+  flex-shrink: 0;
+  scroll-snap-align: start;
+  width: 132px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.latest-thumb {
+  width: 100%;
+  height: 88px;
+  border-radius: 10px;
+  background-size: cover;
+  background-position: center top;
+  margin-bottom: 8px;
+}
+
+.latest-thumb-icon {
+  background: linear-gradient(135deg, #dbeafe, #93c5fd);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+}
+
+.latest-title {
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--ink);
+  margin: 0 0 6px;
+  line-height: 1.3;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.latest-view-all {
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border-style: dashed;
+  border-color: var(--blue-500);
+  color: var(--blue-600);
+}
+
+.latest-view-all-arrow {
+  font-size: 26px;
+  margin-bottom: 6px;
+}
+
+.latest-view-all .latest-title {
+  color: var(--blue-600);
+  -webkit-line-clamp: unset;
+}
