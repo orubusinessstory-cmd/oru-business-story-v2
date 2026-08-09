@@ -1,0 +1,118 @@
+/* Improved article content styling: tables, bullet points, headings */
+
+.article-body {
+  overflow-x: hidden;
+}
+
+.article-body table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin: 4px 0 22px;
+  font-size: 13.5px;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  display: block;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+.article-body table thead,
+.article-body table tbody {
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+}
+
+.article-body th {
+  background: var(--blue-600);
+  color: #fff;
+  font-weight: 700;
+  text-align: left;
+  padding: 10px 14px;
+  white-space: normal;
+}
+
+.article-body td {
+  padding: 10px 14px;
+  border-top: 1px solid var(--border);
+  color: #374151;
+  white-space: normal;
+}
+
+.article-body tbody tr:nth-child(even) {
+  background: var(--blue-50);
+}
+
+.article-body tbody tr:hover {
+  background: #dbeafe;
+}
+
+/* Bullet points */
+.article-body ul {
+  list-style: none;
+  margin: 0 0 18px;
+  padding: 0;
+}
+
+.article-body ul li {
+  position: relative;
+  padding: 6px 0 6px 26px;
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: #374151;
+}
+
+.article-body ul li::before {
+  content: "";
+  position: absolute;
+  left: 4px;
+  top: 15px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--blue-600);
+}
+
+.article-body ol {
+  margin: 0 0 18px;
+  padding-left: 22px;
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: #374151;
+}
+
+.article-body ol li {
+  padding: 4px 0;
+}
+
+.article-body ol li::marker {
+  color: var(--blue-600);
+  font-weight: 700;
+}
+
+/* Headings */
+.article-body h2 {
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--ink);
+  margin: 26px 0 12px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid var(--blue-50);
+}
+
+.article-body h3 {
+  font-size: 15.5px;
+  font-weight: 700;
+  color: var(--blue-700);
+  margin: 20px 0 8px;
+}
+
+.article-body strong {
+  color: var(--ink);
+  font-weight: 700;
+  background: var(--blue-50);
+  padding: 1px 4px;
+  border-radius: 4px;
+}
