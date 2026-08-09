@@ -1,3 +1,4 @@
+import "./menu-drawer.css";
 import "./profile.css";
 import "./favorites-button.css";
 import "./search.css";

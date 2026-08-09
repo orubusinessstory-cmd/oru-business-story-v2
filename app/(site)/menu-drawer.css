@@ -1,0 +1,48 @@
+.drawer-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(17, 24, 39, 0.5);
+  z-index: 100;
+  display: flex;
+}
+
+.drawer-panel {
+  width: 78%;
+  max-width: 300px;
+  height: 100%;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  animation: drawer-slide-in 0.2s ease-out;
+}
+
+@keyframes drawer-slide-in {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+.drawer-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 20px;
+  border-bottom: 1px solid var(--border);
+}
+
+.drawer-links {
+  display: flex;
+  flex-direction: column;
+  padding: 8px 0;
+}
+
+.drawer-link {
+  padding: 15px 22px;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--ink);
+  border-bottom: 1px solid #f3f4f6;
+}

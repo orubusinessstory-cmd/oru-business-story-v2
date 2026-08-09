@@ -1,14 +1,13 @@
 import Link from "next/link";
-import { BellIcon, MenuIcon, NavIcons } from "./Icons";
+import { BellIcon, NavIcons } from "./Icons";
 import FavoriteButton from "./FavoriteButton";
+import MenuDrawer from "./MenuDrawer";
 import type { BusinessIdea } from "@/lib/data";
 
 export function Header() {
   return (
     <div className="topbar">
-      <button className="icon-btn" aria-label="Menu">
-        <MenuIcon />
-      </button>
+      <MenuDrawer />
       <Link href="/" className="logo">
         <div className="oru">Oru</div>
         <div className="sub">BUSINESS STORY</div>
