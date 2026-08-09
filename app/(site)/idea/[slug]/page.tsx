@@ -3,6 +3,7 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { BottomNav, PageHero } from "@/components/Layout";
 import FavoriteButton from "@/components/FavoriteButton";
+import IdeaShareButton from "@/components/IdeaShareButton";
 import { getAllIdeaSlugs, getCategoryBySlug, getIdeaBySlug } from "@/lib/data";
 
 export const revalidate = 0;
@@ -23,6 +24,7 @@ export default async function IdeaPage({ params }: { params: { slug: string } })
       <PageHero title={idea.title} backHref={`/category/${idea.categorySlug}`} />
       <div className="section" style={{ paddingTop: 20, position: "relative" }}>
         <FavoriteButton slug={idea.slug} className="bookmark bookmark-article" />
+        <IdeaShareButton slug={idea.slug} title={idea.title} />
         {idea.imageUrl ? (
           <div className="article-hero-image" style={{ backgroundImage: `url(${idea.imageUrl})` }} />
         ) : (
