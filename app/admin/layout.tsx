@@ -1,3 +1,4 @@
+import "./admin-preview.css";
 import Link from "next/link";
 import "./admin.css";
 import { logout } from "./actions";
