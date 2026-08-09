@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { BellIcon, BookmarkIcon, MenuIcon, NavIcons } from "./Icons";
+import { BellIcon, MenuIcon, NavIcons } from "./Icons";
+import FavoriteButton from "./FavoriteButton";
 import type { BusinessIdea } from "@/lib/data";
 
 export function Header() {
@@ -71,9 +72,7 @@ export function IdeaCard({ idea }: { idea: BusinessIdea }) {
           <span>{idea.investmentRange}</span>
         </div>
       </div>
-      <span className="bookmark">
-        <BookmarkIcon />
-      </span>
+      <FavoriteButton slug={idea.slug} />
     </Link>
   );
 }

@@ -1,0 +1,29 @@
+.bookmark {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bookmark[aria-pressed="true"] {
+  color: var(--blue-600);
+}
+
+.bookmark-article {
+  position: absolute;
+  top: 12px;
+  right: 32px;
+  z-index: 2;
+  background: rgba(255, 255, 255, 0.9);
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  color: #374151;
+}
+
+.bookmark-article[aria-pressed="true"] {
+  color: var(--blue-600);
+}
