@@ -1,3 +1,4 @@
+import "./profile.css";
 import "./favorites-button.css";
 import "./search.css";
 import "./videos.css";
