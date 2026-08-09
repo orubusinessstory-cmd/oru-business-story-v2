@@ -56,6 +56,16 @@ export async function deleteCategory(slug: string) {
 
 // ---------- Business ideas ----------
 
+function slugify(text: string): string {
+  return text
+    .toLowerCase()
+    .trim()
+    .replace(/[^a-z0-9\s-]/g, "")
+    .replace(/\s+/g, "-")
+    .replace(/-+/g, "-")
+    .replace(/^-|-$/g, "");
+}
+
 async function uploadIdeaImage(supabase: any, slug: string, file: File): Promise<string | null> {
   if (!file || file.size === 0) return null;
   const ext = file.name.split(".").pop() || "jpg";
@@ -68,14 +78,20 @@ async function uploadIdeaImage(supabase: any, slug: string, file: File): Promise
 
 export async function createIdea(formData: FormData) {
   const supabase = createClient();
-  const slug = String(formData.get("slug")).trim();
+  const title = String(formData.get("title")).trim();
+
+  let slug = slugify(title);
+  const { data: existing } = await supabase.from("ideas").select("slug").eq("slug", slug).maybeSingle();
+  if (existing) {
+    slug = `${slug}-${Date.now().toString().slice(-5)}`;
+  }
 
   const imageFile = formData.get("image") as File | null;
   const imageUrl = imageFile ? await uploadIdeaImage(supabase, slug, imageFile) : null;
 
   const { error } = await supabase.from("ideas").insert({
     slug,
-    title: String(formData.get("title")).trim(),
+    title,
     category_slug: String(formData.get("category_slug")),
     tag: String(formData.get("tag")).trim(),
     tag_color: String(formData.get("tag_color")),
@@ -86,6 +102,7 @@ export async function createIdea(formData: FormData) {
     image_url: imageUrl,
     featured: formData.get("featured") === "on",
     content: String(formData.get("content")).trim(),
+    related_video_url: String(formData.get("related_video_url") || "").trim() || null,
   });
   if (error) throw new Error(error.message);
 
@@ -118,6 +135,7 @@ export async function updateIdea(originalSlug: string, formData: FormData) {
       image_url: imageUrl,
       featured: formData.get("featured") === "on",
       content: String(formData.get("content")).trim(),
+      related_video_url: String(formData.get("related_video_url") || "").trim() || null,
     })
     .eq("slug", originalSlug);
   if (error) throw new Error(error.message);
@@ -134,6 +152,48 @@ export async function deleteIdea(slug: string) {
 
   revalidatePath("/admin/businesses");
   revalidatePath("/");
+}
+
+// ---------- Videos ----------
+
+export async function createVideo(formData: FormData) {
+  const supabase = createClient();
+  const { error } = await supabase.from("videos").insert({
+    title: String(formData.get("title")).trim(),
+    youtube_url: String(formData.get("youtube_url")).trim(),
+    thumbnail_url: String(formData.get("thumbnail_url") || "").trim() || null,
+  });
+  if (error) throw new Error(error.message);
+
+  revalidatePath("/admin/videos");
+  revalidatePath("/videos");
+  redirect("/admin/videos");
+}
+
+export async function updateVideo(id: string, formData: FormData) {
+  const supabase = createClient();
+  const { error } = await supabase
+    .from("videos")
+    .update({
+      title: String(formData.get("title")).trim(),
+      youtube_url: String(formData.get("youtube_url")).trim(),
+      thumbnail_url: String(formData.get("thumbnail_url") || "").trim() || null,
+    })
+    .eq("id", id);
+  if (error) throw new Error(error.message);
+
+  revalidatePath("/admin/videos");
+  revalidatePath("/videos");
+  redirect("/admin/videos");
+}
+
+export async function deleteVideo(id: string) {
+  const supabase = createClient();
+  const { error } = await supabase.from("videos").delete().eq("id", id);
+  if (error) throw new Error(error.message);
+
+  revalidatePath("/admin/videos");
+  revalidatePath("/videos");
 }
 
 // ---------- Admin users (allowlist registry) ----------

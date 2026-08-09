@@ -1,3 +1,4 @@
+import "./videos.css";
 import "./latest-ideas.css";
 import "./image-fix.css";
 import "./article-content.css";

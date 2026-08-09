@@ -1,6 +1,5 @@
 import { createClient } from "@/lib/supabase/server";
 import { createIdea } from "../../actions";
-import ContentEditor from "../ContentEditor";
 
 export const dynamic = "force-dynamic";
 
@@ -14,9 +13,6 @@ export default async function NewBusinessPage() {
       <p className="admin-sub">Publish a new business idea article to the site.</p>
 
       <form action={createIdea} className="admin-form" encType="multipart/form-data">
-        <label>Slug (unique, lowercase, no spaces — e.g. "mobile-car-detailing")</label>
-        <input type="text" name="slug" required pattern="[a-z0-9-]+" />
-
         <label>Title</label>
         <input type="text" name="title" required />
 
@@ -67,7 +63,14 @@ export default async function NewBusinessPage() {
         </div>
 
         <label>Article Content</label>
-        <ContentEditor name="content" />
+        <textarea name="content" required style={{ minHeight: 240 }} />
+        <p className="admin-hint">
+          Leave a blank line between paragraphs. You can use plain markdown if you want tables,
+          headings, or bold text (e.g. **bold**, | table | syntax |).
+        </p>
+
+        <label>Related YouTube Video (optional — paste the video link)</label>
+        <input type="url" name="related_video_url" placeholder="https://youtube.com/watch?v=..." />
 
         <div className="admin-form-actions">
           <button type="submit" className="admin-btn-primary">

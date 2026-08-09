@@ -41,6 +41,14 @@ export default async function IdeaPage({ params }: { params: { slug: string } })
         <div className="article-body">
           <ReactMarkdown remarkPlugins={[remarkGfm]}>{idea.content}</ReactMarkdown>
         </div>
+        {idea.relatedVideoUrl && (
+          <div className="article-video">
+            <p className="section-label">🎥 Related Video</p>
+            <a href={idea.relatedVideoUrl} target="_blank" rel="noopener noreferrer" className="article-video-link">
+              Watch on YouTube ↗
+            </a>
+          </div>
+        )}
       </div>
       <BottomNav active="Categories" />
     </>

@@ -1,4 +1,3 @@
-import "./admin-preview.css";
 import Link from "next/link";
 import "./admin.css";
 import { logout } from "./actions";
@@ -14,6 +13,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           <Link href="/admin">Dashboard</Link>
           <Link href="/admin/categories">Categories</Link>
           <Link href="/admin/businesses">Businesses</Link>
+          <Link href="/admin/videos">Videos</Link>
           <Link href="/admin/users">Users</Link>
           <a href="/" target="_blank" rel="noopener noreferrer">
             View Site ↗

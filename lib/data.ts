@@ -21,6 +21,14 @@ export type BusinessIdea = {
   imageUrl?: string | null;
   featured?: boolean;
   content: string;
+  relatedVideoUrl?: string | null;
+};
+
+export type Video = {
+  id: string;
+  title: string;
+  youtubeUrl: string;
+  thumbnailUrl: string | null;
 };
 
 // Maps a Supabase row (snake_case) to our app's shape (camelCase)
@@ -38,6 +46,16 @@ function mapIdea(row: any): BusinessIdea {
     imageUrl: row.image_url,
     featured: row.featured,
     content: row.content,
+    relatedVideoUrl: row.related_video_url,
+  };
+}
+
+function mapVideo(row: any): Video {
+  return {
+    id: row.id,
+    title: row.title,
+    youtubeUrl: row.youtube_url,
+    thumbnailUrl: row.thumbnail_url,
   };
 }
 
@@ -129,4 +147,16 @@ export async function getAllCategorySlugs(): Promise<string[]> {
   const { data, error } = await supabase.from("categories").select("slug");
   if (error) return [];
   return (data ?? []).map((row) => row.slug);
+}
+
+export async function getVideos(): Promise<Video[]> {
+  const { data, error } = await supabase
+    .from("videos")
+    .select("*")
+    .order("created_at", { ascending: false });
+  if (error) {
+    console.error("getVideos error:", error.message);
+    return [];
+  }
+  return (data ?? []).map(mapVideo);
 }

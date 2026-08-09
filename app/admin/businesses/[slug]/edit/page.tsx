@@ -1,7 +1,6 @@
 import { notFound } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { updateIdea } from "../../../actions";
-import ContentEditor from "../../ContentEditor";
 
 export const dynamic = "force-dynamic";
 
@@ -87,7 +86,19 @@ export default async function EditBusinessPage({ params }: { params: { slug: str
         </div>
 
         <label>Article Content</label>
-        <ContentEditor name="content" defaultValue={idea.content} />
+        <textarea name="content" defaultValue={idea.content} required style={{ minHeight: 240 }} />
+        <p className="admin-hint">
+          Leave a blank line between paragraphs. You can use plain markdown if you want tables,
+          headings, or bold text (e.g. **bold**, | table | syntax |).
+        </p>
+
+        <label>Related YouTube Video (optional — paste the video link)</label>
+        <input
+          type="url"
+          name="related_video_url"
+          defaultValue={idea.related_video_url ?? ""}
+          placeholder="https://youtube.com/watch?v=..."
+        />
 
         <div className="admin-form-actions">
           <button type="submit" className="admin-btn-primary">

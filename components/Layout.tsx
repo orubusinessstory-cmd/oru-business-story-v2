@@ -37,7 +37,7 @@ export function BottomNav({ active = "Home" }: { active?: string }) {
     { label: "Home", href: "/" },
     { label: "Categories", href: "/categories" },
     { label: "Favorites", href: "/favorites" },
-    { label: "Resources", href: "/resources" },
+    { label: "Videos", href: "/videos" },
     { label: "Profile", href: "/profile" },
   ];
   return (
