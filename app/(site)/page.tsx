@@ -78,10 +78,24 @@ export default async function HomePage() {
       <div className="section">
         <div className="section-head">
           <h2>Latest Ideas</h2>
+          <Link href="/categories" className="view-all">
+            View all
+          </Link>
+        </div>
+      </div>
+      <div className="cards">
+        {latest.map((idea) => (
+          <IdeaCard key={idea.slug} idea={idea} />
+        ))}
+      </div>
+
+      <div className="section">
+        <div className="section-head">
+          <h2>Featured Business Ideas</h2>
         </div>
       </div>
       <div className="latest-scroll">
-        {latest.map((idea) => (
+        {featured.map((idea) => (
           <Link key={idea.slug} href={`/idea/${idea.slug}`} className="latest-card">
             {idea.imageUrl ? (
               <div className="latest-thumb" style={{ backgroundImage: `url(${idea.imageUrl})` }} />
@@ -98,20 +112,6 @@ export default async function HomePage() {
           <span className="latest-view-all-arrow">→</span>
           <p className="latest-title">View All</p>
         </Link>
-      </div>
-
-      <div className="section">
-        <div className="section-head">
-          <h2>Featured Business Ideas</h2>
-          <Link href="/categories" className="view-all">
-            View all
-          </Link>
-        </div>
-      </div>
-      <div className="cards">
-        {featured.map((idea) => (
-          <IdeaCard key={idea.slug} idea={idea} />
-        ))}
       </div>
 
       <BottomNav active="Home" />
