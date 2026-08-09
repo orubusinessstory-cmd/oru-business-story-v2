@@ -1,3 +1,4 @@
+import "./image-fix.css";
 import "./article-content.css";
 import "./globals.css";
 
