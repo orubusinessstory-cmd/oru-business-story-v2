@@ -26,10 +26,7 @@ export default function MenuDrawer() {
         <div className="drawer-overlay" onClick={() => setOpen(false)}>
           <div className="drawer-panel" onClick={(e) => e.stopPropagation()}>
             <div className="drawer-head">
-              <div className="logo" style={{ textAlign: "left" }}>
-                <div className="oru">Oru</div>
-                <div className="sub">BUSINESS STORY</div>
-              </div>
+              <img src="/logo.png" alt="Oru Business Story" className="logo-img" style={{ height: 40 }} />
               <button className="icon-btn" aria-label="Close menu" onClick={() => setOpen(false)}>
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
                   <line x1="18" y1="6" x2="6" y2="18" />

@@ -1,3 +1,4 @@
+import "./logo.css";
 import "./desktop-responsive.css";
 import "./share-button.css";
 import "./notifications.css";

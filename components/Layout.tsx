@@ -9,9 +9,8 @@ export function Header() {
   return (
     <div className="topbar">
       <MenuDrawer />
-      <Link href="/" className="logo">
-        <div className="oru">Oru</div>
-        <div className="sub">BUSINESS STORY</div>
+      <Link href="/" className="logo-link">
+        <img src="/logo.png" alt="Oru Business Story" className="logo-img" />
       </Link>
       <NotificationsBell />
     </div>
