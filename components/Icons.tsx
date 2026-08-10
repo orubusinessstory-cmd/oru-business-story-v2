@@ -66,6 +66,50 @@ export function GridIcon() {
   );
 }
 
+export const CategoryIcons: Record<string, JSX.Element> = {
+  food: (
+    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M7 2v6a2 2 0 0 0 2 2v12" />
+      <path d="M7 2v6" />
+      <path d="M11 2v8" />
+      <path d="M17 2c-2 1-3 3-3 6s1 5 3 6v8" />
+    </svg>
+  ),
+  agriculture: (
+    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M12 22V12" />
+      <path d="M12 12C12 7 8 4 4 4c0 5 3 8 8 8Z" />
+      <path d="M12 12c0-4 3-6 7-6 0 4-2 6-7 6Z" />
+    </svg>
+  ),
+  manufacturing: (
+    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M3 21V11l6 4v-4l6 4v-4l6 4v6z" />
+      <line x1="3" y1="21" x2="21" y2="21" />
+    </svg>
+  ),
+  retail: (
+    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
+      <line x1="3" y1="6" x2="21" y2="6" />
+      <path d="M16 10a4 4 0 0 1-8 0" />
+    </svg>
+  ),
+  online: (
+    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+      <circle cx="12" cy="12" r="10" />
+      <line x1="2" y1="12" x2="22" y2="12" />
+      <path d="M12 2a15 15 0 0 1 0 20 15 15 0 0 1 0-20" />
+    </svg>
+  ),
+  "small-business": (
+    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+      <rect x="2" y="7" width="20" height="14" rx="2" />
+      <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
+    </svg>
+  ),
+};
+
 export const NavIcons = {
   Home: (
     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">

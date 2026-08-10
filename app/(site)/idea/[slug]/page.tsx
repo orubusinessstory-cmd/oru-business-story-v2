@@ -36,11 +36,15 @@ export default async function IdeaPage({ params }: { params: { slug: string } })
             {category.icon} {category.name}
           </p>
         )}
-        <div className="article-meta">
-          <span>📊 Profit Potential</span>
-          <span className={`profit ${idea.profitPotential.toLowerCase()}`}>{idea.profitPotential}</span>
-          <span className="divider">|</span>
-          <span>{idea.investmentRange}</span>
+        <div className="card-meta-grid" style={{ margin: "14px 0 20px" }}>
+          <div className="meta-block">
+            <span className="meta-label">📈 Profit Potential</span>
+            <span className={`profit ${idea.profitPotential.toLowerCase()}`}>{idea.profitPotential}</span>
+          </div>
+          <div className="meta-block">
+            <span className="meta-label">💰 Investment</span>
+            <span className="meta-value">{idea.investmentRange}</span>
+          </div>
         </div>
         <div className="article-body">
           <ReactMarkdown remarkPlugins={[remarkGfm]}>{idea.content}</ReactMarkdown>

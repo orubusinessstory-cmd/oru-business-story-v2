@@ -62,11 +62,15 @@ export function IdeaCard({ idea }: { idea: BusinessIdea }) {
         <h3 className="card-title">{idea.title}</h3>
         <span className={`badge ${idea.tagColor}`}>{idea.tag}</span>
         <p className="card-desc">{idea.description}</p>
-        <div className="card-meta">
-          <span>📊 Profit Potential</span>
-          <span className={`profit ${idea.profitPotential.toLowerCase()}`}>{idea.profitPotential}</span>
-          <span className="divider">|</span>
-          <span>{idea.investmentRange}</span>
+        <div className="card-meta-grid">
+          <div className="meta-block">
+            <span className="meta-label">📈 Profit Potential</span>
+            <span className={`profit ${idea.profitPotential.toLowerCase()}`}>{idea.profitPotential}</span>
+          </div>
+          <div className="meta-block">
+            <span className="meta-label">💰 Investment</span>
+            <span className="meta-value">{idea.investmentRange}</span>
+          </div>
         </div>
       </div>
       <FavoriteButton slug={idea.slug} />

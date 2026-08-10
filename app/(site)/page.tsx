@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Header, BottomNav, IdeaCard } from "@/components/Layout";
-import { FilterIcon, GridIcon, SearchIcon } from "@/components/Icons";
+import { CategoryIcons, FilterIcon, GridIcon, SearchIcon } from "@/components/Icons";
 import { getCategories, getFeaturedIdeas, getLatestIdeas } from "@/lib/data";
 
 export const revalidate = 0;
@@ -19,16 +19,25 @@ export default async function HomePage() {
       <div className="hero">
         <div className="rocket-wrap">
           <svg viewBox="0 0 100 130" width="150" height="170">
-            <path d="M50 5 C65 20 68 45 65 70 L35 70 C32 45 35 20 50 5 Z" fill="#fff" />
-            <path d="M50 5 C60 18 63 38 62 55 L38 55 C37 38 40 18 50 5 Z" fill="#93c5fd" opacity="0.5" />
-            <circle cx="50" cy="38" r="9" fill="#1d4ed8" />
-            <circle cx="50" cy="38" r="5" fill="#3b82f6" />
-            <path d="M35 55 L20 75 L35 72 Z" fill="#2563eb" />
-            <path d="M65 55 L80 75 L65 72 Z" fill="#2563eb" />
-            <path d="M42 70 L58 70 L54 88 L46 88 Z" fill="#e5e7eb" />
-            <path d="M45 88 C45 95 42 105 38 112" stroke="#93c5fd" strokeWidth="6" fill="none" strokeLinecap="round" opacity="0.8" />
-            <path d="M55 88 C58 97 62 108 66 116" stroke="#3b82f6" strokeWidth="4" fill="none" strokeLinecap="round" opacity="0.6" />
-            <path d="M38 112 C55 100 90 95 96 60" stroke="#bfdbfe" strokeWidth="3" fill="none" strokeLinecap="round" strokeDasharray="2 6" opacity="0.8" />
+            <g stroke="#fde68a" strokeWidth="3" strokeLinecap="round" opacity="0.9">
+              <line x1="50" y1="2" x2="50" y2="12" />
+              <line x1="28" y1="10" x2="35" y2="17" />
+              <line x1="72" y1="10" x2="65" y2="17" />
+              <line x1="18" y1="30" x2="28" y2="30" />
+              <line x1="82" y1="30" x2="72" y2="30" />
+            </g>
+            <circle cx="50" cy="32" r="16" fill="#fde047" opacity="0.95" />
+            <rect x="43" y="46" width="14" height="10" rx="2" fill="#93c5fd" />
+            <rect x="45" y="57" width="10" height="4" rx="1" fill="#60a5fa" />
+            <path
+              d="M15 105 C35 105 45 95 50 70 C54 50 65 45 88 45"
+              stroke="#fde68a"
+              strokeWidth="4"
+              fill="none"
+              strokeLinecap="round"
+              strokeDasharray="1 9"
+            />
+            <path d="M78 38 L92 45 L78 55 Z" fill="#fde047" />
           </svg>
         </div>
         <div className="bars">
@@ -38,7 +47,7 @@ export default async function HomePage() {
           <div style={{ height: 68 }} />
           <div style={{ height: 86 }} />
         </div>
-        <p className="hero-eyebrow">Discover</p>
+        <p className="hero-badge">Discover • Plan • Grow</p>
         <h1 className="hero-title">
           Profitable
           <br />
@@ -61,14 +70,16 @@ export default async function HomePage() {
             View all
           </Link>
         </div>
-        <div className="chips">
-          <Link href="/categories" className="chip active">
-            <GridIcon />
+        <div className="category-grid">
+          <Link href="/categories" className="category-tile active">
+            <span className="category-tile-icon">
+              <GridIcon />
+            </span>
             All
           </Link>
           {categories.map((cat) => (
-            <Link key={cat.slug} href={`/category/${cat.slug}`} className="chip">
-              <span>{cat.icon}</span>
+            <Link key={cat.slug} href={`/category/${cat.slug}`} className="category-tile">
+              <span className="category-tile-icon">{CategoryIcons[cat.slug] ?? cat.icon}</span>
               {cat.name}
             </Link>
           ))}
