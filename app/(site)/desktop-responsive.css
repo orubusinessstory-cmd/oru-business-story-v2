@@ -1,0 +1,56 @@
+/* Desktop responsive layout. Mobile styling (below these breakpoints) is untouched. */
+
+@media (min-width: 700px) {
+  html,
+  body {
+    background: #eef1f5;
+  }
+
+  .shell {
+    max-width: 760px;
+    box-shadow: 0 0 0 1px var(--border);
+  }
+
+  .bottomnav {
+    max-width: 760px;
+  }
+
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  }
+
+  .video-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  }
+
+  .chips {
+    flex-wrap: wrap;
+    overflow-x: visible;
+    padding-bottom: 0;
+  }
+
+  .latest-scroll {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .shell {
+    max-width: 960px;
+  }
+
+  .bottomnav {
+    max-width: 960px;
+  }
+
+  .cards {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  }
+
+  .video-list {
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  }
+}
