@@ -10,14 +10,24 @@
   margin: 0 0 10px;
 }
 
-/* Category grid tiles (replaces the old horizontal chip row) — always 5 across, matching the mockup */
+/* Category row — swipeable horizontally, so it still works once more categories are added */
 .category-grid {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 8px;
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+
+.category-grid::-webkit-scrollbar {
+  display: none;
 }
 
 .category-tile {
+  flex: 0 0 auto;
+  scroll-snap-align: start;
+  width: 84px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -54,24 +64,36 @@
   border-radius: 10px;
 }
 
-/* Card meta — two-column icon/label/value blocks */
+/* Card meta — shaded box with two stats side by side, matching the mockup */
 .card-meta-grid {
   display: flex;
-  gap: 18px;
-  flex-wrap: wrap;
-  margin-top: 4px;
+  align-items: stretch;
+  background: #ecfdf5;
+  border-radius: 12px;
+  padding: 10px 14px;
+  margin-top: 6px;
 }
 
 .meta-block {
+  flex: 1;
   display: flex;
   flex-direction: column;
   gap: 3px;
 }
 
+.meta-block:first-child {
+  border-right: 1px solid #bbf7d0;
+  padding-right: 12px;
+  margin-right: 12px;
+}
+
 .meta-label {
   font-size: 11px;
-  color: var(--gray-500);
+  color: #374151;
   font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 4px;
 }
 
 .meta-value {

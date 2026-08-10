@@ -10,7 +10,7 @@ export function Header() {
     <div className="topbar">
       <MenuDrawer />
       <Link href="/" className="logo-link">
-        <img src="/logo.png" alt="Oru Business Story" className="logo-img" />
+        <img src="/logo-header.png" alt="Oru Business Story" className="logo-img" />
       </Link>
       <NotificationsBell />
     </div>
