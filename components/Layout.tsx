@@ -64,7 +64,7 @@ export function IdeaCard({ idea }: { idea: BusinessIdea }) {
         <p className="card-desc">{idea.description}</p>
         <div className="card-meta-grid">
           <div className="meta-block">
-            <span className="meta-label">📈 Profit</span>
+            <span className="meta-label">📈 Profit Potential</span>
             <span className={`profit ${idea.profitPotential.toLowerCase()}`}>{idea.profitPotential}</span>
           </div>
           <div className="meta-block">
