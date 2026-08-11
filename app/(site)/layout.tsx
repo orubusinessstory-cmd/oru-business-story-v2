@@ -12,7 +12,15 @@ import "./logo.css";
 import "./redesign.css";
 import "./share-button.css";
 import "./desktop-responsive.css";
+import "./splash.css";
+
+import SplashScreen from "@/components/SplashScreen";
 
 export default function SiteLayout({ children }: { children: React.ReactNode }) {
-  return <div className="shell">{children}</div>;
+  return (
+    <div className="shell">
+      <SplashScreen />
+      {children}
+    </div>
+  );
 }
