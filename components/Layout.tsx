@@ -17,7 +17,7 @@ export function Header() {
   );
 }
 
-export function PageHero({ title, backHref = "/" }: { title: string; backHref?: string }) {
+export function PageHero({ title, subtitle, backHref = "/" }: { title: string; subtitle?: string; backHref?: string }) {
   return (
     <div className="page-hero">
       <Link href={backHref} className="back-btn" aria-label="Back">
@@ -25,7 +25,10 @@ export function PageHero({ title, backHref = "/" }: { title: string; backHref?: 
           <polyline points="15 18 9 12 15 6" />
         </svg>
       </Link>
-      <h1>{title}</h1>
+      <div>
+        <h1>{title}</h1>
+        {subtitle && <p className="page-hero-sub">{subtitle}</p>}
+      </div>
     </div>
   );
 }

@@ -1,8 +1,18 @@
 import Link from "next/link";
 import { BottomNav, PageHero } from "@/components/Layout";
+import { CategoryIcons } from "@/components/Icons";
 import { getCategories, getIdeaCountByCategory } from "@/lib/data";
 
 export const revalidate = 0;
+
+const COLORS: Record<string, string> = {
+  food: "blue",
+  agriculture: "green",
+  "small-business": "orange",
+  online: "purple",
+  manufacturing: "sky",
+  retail: "yellow",
+};
 
 export default async function CategoriesPage() {
   const categories = await getCategories();
@@ -10,18 +20,24 @@ export default async function CategoriesPage() {
 
   return (
     <>
-      <PageHero title="All Categories" />
-      <div className="cards" style={{ paddingTop: 20 }}>
+      <PageHero title="All Categories" subtitle="Explore business ideas by category" />
+      <div className="category-row-list">
         {categories.map((cat, i) => {
           const count = counts[i];
+          const color = COLORS[cat.slug] ?? "blue";
           return (
-            <Link key={cat.slug} href={`/category/${cat.slug}`} className="card" style={{ alignItems: "center" }}>
-              <div className="thumb">{cat.icon}</div>
-              <div className="card-body">
-                <h3 className="card-title">{cat.name}</h3>
-                <p className="card-desc">
+            <Link key={cat.slug} href={`/category/${cat.slug}`} className="category-row">
+              <div className={`category-row-thumb tint-${color}`}>{CategoryIcons[cat.slug] ?? cat.icon}</div>
+              <div className="category-row-body">
+                <h3>{cat.name}</h3>
+                <p>
                   {count} business {count === 1 ? "idea" : "ideas"}
                 </p>
+              </div>
+              <div className={`category-row-arrow tint-${color}`}>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <polyline points="9 18 15 12 9 6" />
+                </svg>
               </div>
             </Link>
           );
