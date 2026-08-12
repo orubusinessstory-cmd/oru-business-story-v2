@@ -12,6 +12,7 @@ const COLORS: Record<string, string> = {
   online: "purple",
   manufacturing: "sky",
   retail: "yellow",
+  "home-based": "teal",
 };
 
 export default async function CategoriesPage() {
