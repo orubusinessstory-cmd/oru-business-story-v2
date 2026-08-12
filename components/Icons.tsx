@@ -132,8 +132,8 @@ export const NavIcons = {
   ),
   Videos: (
     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-      <rect x="2" y="5" width="15" height="14" rx="2" />
-      <path d="M17 9l5-3v12l-5-3" />
+      <rect x="2" y="4" width="20" height="16" rx="3" />
+      <path d="M10 8.5v7l6-3.5z" fill="currentColor" stroke="none" />
     </svg>
   ),
   Profile: (
