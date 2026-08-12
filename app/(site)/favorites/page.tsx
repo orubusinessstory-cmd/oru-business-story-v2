@@ -31,7 +31,7 @@ export default function FavoritesPage() {
     let cancelled = false;
 
     async function load() {
-      const slugs = getFavorites();
+      const slugs = await getFavorites();
       if (slugs.length === 0) {
         if (!cancelled) setIdeas([]);
         return;

@@ -7,16 +7,24 @@ export default function FavoriteButton({ slug, className = "bookmark" }: { slug:
   const [saved, setSaved] = useState(false);
 
   useEffect(() => {
-    setSaved(isFavorite(slug));
-    const sync = () => setSaved(isFavorite(slug));
+    let cancelled = false;
+    async function sync() {
+      const result = await isFavorite(slug);
+      if (!cancelled) setSaved(result);
+    }
+    sync();
     window.addEventListener(FAVORITES_EVENT, sync);
-    return () => window.removeEventListener(FAVORITES_EVENT, sync);
+    return () => {
+      cancelled = true;
+      window.removeEventListener(FAVORITES_EVENT, sync);
+    };
   }, [slug]);
 
-  function handleClick(e: React.MouseEvent) {
+  async function handleClick(e: React.MouseEvent) {
     e.preventDefault();
     e.stopPropagation();
-    setSaved(toggleFavorite(slug));
+    const result = await toggleFavorite(slug);
+    setSaved(result);
   }
 
   return (

@@ -1,5 +1,6 @@
 import { BottomNav, PageHero } from "@/components/Layout";
 import ShareButton from "@/components/ShareButton";
+import AuthPanel from "@/components/AuthPanel";
 
 const YOUTUBE_URL = "https://youtube.com/@orubusinessstory?si=ENZ0n736zs5XZW4i";
 const CONTACT_EMAIL = "orubusinessstory@gmail.com";
@@ -19,6 +20,8 @@ export default function ProfilePage() {
           ▶ Subscribe on YouTube
         </a>
       </div>
+
+      <AuthPanel />
 
       <div className="profile-section">
         <p className="profile-section-title">Contact</p>
