@@ -59,7 +59,7 @@ const NAV_ITEMS = [
   },
 ];
 
-export function AdminSidebarNav() {
+export function AdminSidebarNav({ onNavigate }: { onNavigate?: () => void }) {
   const pathname = usePathname();
 
   return (
@@ -67,7 +67,7 @@ export function AdminSidebarNav() {
       {NAV_ITEMS.map((item) => {
         const active = item.href === "/admin" ? pathname === "/admin" : pathname?.startsWith(item.href);
         return (
-          <Link key={item.href} href={item.href} className={`admin-nav-link ${active ? "active" : ""}`}>
+          <Link key={item.href} href={item.href} className={`admin-nav-link ${active ? "active" : ""}`} onClick={onNavigate}>
             {item.icon}
             {item.label}
           </Link>
