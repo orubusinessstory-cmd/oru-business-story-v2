@@ -20,9 +20,7 @@ export default function AdminShell({
       <aside className={`admin-sidebar ${open ? "open" : ""}`}>
         <div className="admin-logo">
           <img src="/logo-mark.png" alt="" className="admin-logo-mark" />
-          <span>
-            ru<span className="admin-logo-badge">ADMIN</span>
-          </span>
+          <span className="admin-logo-badge">ADMIN</span>
         </div>
         <AdminSidebarNav onNavigate={() => setOpen(false)} />
         <div className="admin-sidebar-bottom">
