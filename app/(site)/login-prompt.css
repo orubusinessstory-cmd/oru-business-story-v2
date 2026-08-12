@@ -1,0 +1,75 @@
+.login-prompt-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.5);
+  z-index: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.login-prompt-card {
+  background: #fff;
+  border-radius: 20px;
+  padding: 28px 24px 22px;
+  width: 100%;
+  max-width: 340px;
+  text-align: center;
+}
+
+.login-prompt-logo {
+  width: 52px;
+  height: 52px;
+  margin: 0 auto 12px;
+  display: block;
+}
+
+.login-prompt-card h3 {
+  font-size: 17px;
+  font-weight: 800;
+  color: var(--ink);
+  margin: 0 0 8px;
+}
+
+.login-prompt-card p {
+  font-size: 12.5px;
+  color: var(--gray-500);
+  line-height: 1.5;
+  margin: 0 0 16px;
+}
+
+.login-prompt-card .auth-form {
+  padding: 0;
+  text-align: left;
+}
+
+.login-prompt-skip {
+  background: none;
+  border: none;
+  color: var(--gray-500);
+  font-size: 12.5px;
+  font-weight: 600;
+  margin-top: 14px;
+  padding: 4px;
+}
+
+/* Shared auth form pieces (used here and on the Profile page) */
+.auth-message {
+  font-size: 12.5px;
+  color: #6b7280;
+  margin-top: 8px;
+}
+
+.auth-toggle {
+  background: none;
+  border: none;
+  color: var(--blue-600);
+  font-size: 12.5px;
+  font-weight: 700;
+  margin-top: 10px;
+  padding: 4px;
+  display: block;
+  text-align: center;
+  width: 100%;
+}

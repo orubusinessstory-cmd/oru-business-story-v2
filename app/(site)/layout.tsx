@@ -13,13 +13,16 @@ import "./redesign.css";
 import "./share-button.css";
 import "./desktop-responsive.css";
 import "./splash.css";
+import "./login-prompt.css";
 
 import SplashScreen from "@/components/SplashScreen";
+import LoginPrompt from "@/components/LoginPrompt";
 
 export default function SiteLayout({ children }: { children: React.ReactNode }) {
   return (
     <div className="shell">
       <SplashScreen />
+      <LoginPrompt />
       {children}
     </div>
   );
