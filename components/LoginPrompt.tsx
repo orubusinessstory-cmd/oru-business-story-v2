@@ -23,7 +23,6 @@ export default function LoginPrompt() {
       }
     }
 
-    // Small delay so it appears just after the splash screen finishes
     const t = setTimeout(check, 1500);
     return () => {
       cancelled = true;
@@ -36,10 +35,19 @@ export default function LoginPrompt() {
   return (
     <div className="login-prompt-overlay" onClick={() => setOpen(false)}>
       <div className="login-prompt-card" onClick={(e) => e.stopPropagation()}>
+        <button
+          type="button"
+          className="login-prompt-close"
+          onClick={() => setOpen(false)}
+          aria-label="Close"
+        >
+          ×
+        </button>
         <img src="/logo-mark.png" alt="" className="login-prompt-logo" />
-        <h3>Sign in to sync favorites</h3>
-        <p>Optional — save your favorite business ideas and access them on any device.</p>
+        <h3>Welcome Back!</h3>
+        <p>Login to access your account</p>
         <AuthForm onSuccess={() => setOpen(false)} />
+
         <button type="button" className="login-prompt-skip" onClick={() => setOpen(false)}>
           Continue without signing in
         </button>
