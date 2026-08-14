@@ -5,6 +5,7 @@ import { supabase } from "@/lib/supabaseClient";
 import { FAVORITES_EVENT, mergeLocalFavoritesIntoAccount } from "@/lib/favorites";
 
 export default function AuthForm({ onSuccess }: { onSuccess?: () => void }) {
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [mode, setMode] = useState<"signin" | "signup">("signin");
@@ -19,7 +20,11 @@ export default function AuthForm({ onSuccess }: { onSuccess?: () => void }) {
     setMessage(null);
 
     if (mode === "signup") {
-      const { data, error } = await supabase.auth.signUp({ email, password });
+      const { data, error } = await supabase.auth.signUp({
+        email,
+        password,
+        options: { data: { full_name: name } },
+      });
       if (error) {
         setMessage(error.message);
       } else if (data.user && !data.session) {
@@ -63,6 +68,22 @@ export default function AuthForm({ onSuccess }: { onSuccess?: () => void }) {
   return (
     <>
       <form onSubmit={handleSubmit} className="auth-form">
+        {mode === "signup" && (
+          <div className="auth-input-wrap">
+            <svg className="auth-input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <circle cx="12" cy="8" r="4"/>
+              <path d="M4 20c0-4 3.6-6 8-6s8 2 8 6"/>
+            </svg>
+            <input
+              type="text"
+              placeholder="Full name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              required
+            />
+          </div>
+        )}
+
         <div className="auth-input-wrap">
           <svg className="auth-input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
             <path d="M3 6.5A1.5 1.5 0 0 1 4.5 5h15A1.5 1.5 0 0 1 21 6.5v11A1.5 1.5 0 0 1 19.5 19h-15A1.5 1.5 0 0 1 3 17.5v-11Z"/>

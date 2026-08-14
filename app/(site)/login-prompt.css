@@ -194,3 +194,71 @@
   color: var(--ink);
   cursor: pointer;
 }
+
+.auth-submit-btn {
+  background: linear-gradient(135deg, #2563eb, #4f46e5);
+  border: none;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.auth-submit-btn:active {
+  transform: scale(0.98);
+  box-shadow: 0 2px 6px rgba(37, 99, 235, 0.25);
+}
+.auth-submit-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+/* =====================================================================
+   PASTE TARGET: app/(site)/login-prompt.css
+   APPEND to the END of the file — do not remove anything already there.
+   (Skip this if you already ran the earlier append commands in chat —
+   check first with: tail -60 "app/(site)/login-prompt.css")
+   ===================================================================== */
+
+.auth-submit-btn {
+  background: linear-gradient(135deg, #2563eb, #4f46e5);
+  border: none;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.auth-submit-btn:active {
+  transform: scale(0.98);
+  box-shadow: 0 2px 6px rgba(37, 99, 235, 0.25);
+}
+.auth-submit-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.login-prompt-overlay {
+  animation: authFadeIn 0.2s ease;
+}
+.login-prompt-card {
+  animation: authSlideUp 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+@keyframes authFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes authSlideUp {
+  from { opacity: 0; transform: translateY(16px) scale(0.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.auth-input-wrap input {
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+.auth-input-wrap input:focus {
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+}
+.auth-google-btn {
+  transition: background 0.15s ease, transform 0.15s ease;
+}
+.auth-google-btn:active {
+  transform: scale(0.98);
+  background: #f9fafb;
+}
+.login-prompt-skip {
+  transition: color 0.15s ease;
+}
