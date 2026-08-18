@@ -301,3 +301,129 @@
     grid-template-columns: repeat(2, 1fr);
   }
 }
+.analytics-panel {
+  background: #fff;
+  border-radius: 12px;
+  padding: 16px;
+  margin-top: 16px;
+}
+
+.analytics-range-buttons {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+
+.analytics-range-btn {
+  padding: 6px 14px;
+  border-radius: 20px;
+  border: 1px solid #ddd;
+  background: #f7f7f7;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.analytics-range-btn.active {
+  background: #2e7d32;
+  color: #fff;
+  border-color: #2e7d32;
+}
+
+.analytics-custom-dates {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+  font-size: 13px;
+}
+
+.analytics-custom-dates input[type="date"] {
+  padding: 6px 8px;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+}
+
+.analytics-total-card {
+  display: flex;
+  flex-direction: column;
+  background: #e8f5e9;
+  border-radius: 10px;
+  padding: 14px 18px;
+  margin-bottom: 16px;
+}
+
+.analytics-total-label {
+  font-size: 12px;
+  color: #2e7d32;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.analytics-total-number {
+  font-size: 32px;
+  font-weight: 700;
+  color: #1b5e20;
+}
+
+.analytics-chart {
+  display: flex;
+  align-items: flex-end;
+  gap: 4px;
+  height: 120px;
+  margin-bottom: 20px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+}
+
+.analytics-bar-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  height: 100%;
+  min-width: 24px;
+}
+
+.analytics-bar {
+  width: 14px;
+  background: #4caf50;
+  border-radius: 3px 3px 0 0;
+  min-height: 2px;
+}
+
+.analytics-bar-label {
+  font-size: 9px;
+  color: #888;
+  margin-top: 4px;
+  writing-mode: vertical-rl;
+}
+
+.analytics-subheading {
+  font-size: 14px;
+  margin: 8px 0;
+  color: #333;
+}
+
+.analytics-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.analytics-table td {
+  padding: 8px 6px;
+  border-bottom: 1px solid #eee;
+}
+
+.analytics-table td:last-child {
+  text-align: right;
+  font-weight: 600;
+  width: 60px;
+}
+
+.analytics-empty,
+.analytics-loading {
+  font-size: 13px;
+  color: #999;
+}

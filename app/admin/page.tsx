@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
+import AnalyticsPanel from "@/components/admin/AnalyticsPanel";
 
 export const dynamic = "force-dynamic";
 
@@ -69,18 +70,7 @@ export default async function DashboardPage() {
 
       <div className="admin-card">
         <h3 style={{ marginTop: 0 }}>Views &amp; Traffic</h3>
-        <p style={{ color: "#6b7280", fontSize: 14, lineHeight: 1.6 }}>
-          Page views, visitor counts, and traffic sources are tracked automatically by Vercel
-          Analytics. Full charts and trends live on your Vercel dashboard, not in this panel.
-        </p>
-        <a
-          href="https://vercel.com/dashboard"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="admin-btn-primary"
-        >
-          Open Vercel Analytics ↗
-        </a>
+        <AnalyticsPanel />
       </div>
 
       <div className="admin-card">
@@ -99,7 +89,7 @@ export default async function DashboardPage() {
                 {idea.image_url ? (
                   <img src={idea.image_url} alt="" className="admin-recent-thumb" />
                 ) : (
-                  <div className="admin-recent-thumb admin-recent-thumb-icon">{idea.icon ?? "💼"}</div>
+                  <div className="admin-recent-thumb admin-recent-thumb-icon">{idea.icon ?? " 💼"}</div>
                 )}
                 <div className="admin-recent-body">
                   <span className="admin-recent-title">{idea.title}</span>
