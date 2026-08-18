@@ -17,6 +17,7 @@ export default function AnalyticsPanel() {
   const [byPage, setByPage] = useState<{ path: string; count: number }[]>([]);
   const [byDay, setByDay] = useState<{ day: string; count: number }[]>([]);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     if (range === "custom" && (!customStart || !customEnd)) return;
@@ -26,15 +27,20 @@ export default function AnalyticsPanel() {
 
   async function load() {
     setLoading(true);
-    const { start, end } = getRangeDates(range, customStart, customEnd);
-    const [t, pages, days] = await Promise.all([
-      getTotalViews(start, end),
-      getViewsByPage(start, end),
-      getViewsByDay(start, end),
-    ]);
-    setTotal(t);
-    setByPage(pages);
-    setByDay(days);
+    setError(null);
+    try {
+      const { start, end } = getRangeDates(range, customStart, customEnd);
+      const [t, pages, days] = await Promise.all([
+        getTotalViews(start, end),
+        getViewsByPage(start, end),
+        getViewsByDay(start, end),
+      ]);
+      setTotal(t);
+      setByPage(pages);
+      setByDay(days);
+    } catch (err: any) {
+      setError(err?.message ?? "Something went wrong loading analytics.");
+    }
     setLoading(false);
   }
 
@@ -67,9 +73,15 @@ export default function AnalyticsPanel() {
         </div>
       )}
 
+      {error && (
+        <p style={{ color: "#c62828", fontSize: 13, background: "#fdecea", padding: "8px 12px", borderRadius: 8 }}>
+          Error: {error}
+        </p>
+      )}
+
       {loading ? (
         <p className="analytics-loading">Loading...</p>
-      ) : (
+      ) : !error ? (
         <>
           <div className="analytics-total-card">
             <span className="analytics-total-label">Total Visits</span>
@@ -106,7 +118,7 @@ export default function AnalyticsPanel() {
             </tbody>
           </table>
         </>
-      )}
+      ) : null}
     </div>
   );
 }
