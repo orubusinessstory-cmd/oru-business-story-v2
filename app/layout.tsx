@@ -1,9 +1,10 @@
 import type { Metadata, Viewport } from "next";
 import { Analytics } from "@vercel/analytics/react";
+import PageViewTracker from "@/components/PageViewTracker";
 
 export const metadata: Metadata = {
   title: "Oru Business Story",
-  description: "Discover profitable business ideas across food, agriculture, small business, online, and manufacturing.",
+  description: "Discover profitable business ideas",
   manifest: "/manifest.json",
   appleWebApp: {
     capable: true,
@@ -24,6 +25,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <body style={{ margin: 0 }}>
+        <PageViewTracker />
         {children}
         <Analytics />
       </body>
