@@ -1,7 +1,7 @@
 import { createAdminClient } from "@/lib/supabase/admin";
 import { slugify } from "@/lib/slugify";
 import { AUTOMATION_CATEGORIES } from "./categories";
-import { generateBusinessArticle } from "./anthropicClient";
+import { generateBusinessArticle } from "./geminiClient";
 import { searchBusinessPhoto } from "./unsplash";
 
 const IST_TIME_ZONE = "Asia/Kolkata";

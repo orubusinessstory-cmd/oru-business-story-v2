@@ -9,7 +9,7 @@ app/api/cron/generate-article/route.ts   ← Vercel Cron ദിവസവും c
 app/admin/automation/page.tsx            ← Admin Panel-ലെ പുതിയ "Automation" page
 app/admin/automation/automation.css
 lib/automation/categories.ts             ← 12 categories, rotation order
-lib/automation/anthropicClient.ts        ← Claude API call + Malayalam prompt
+lib/automation/geminiClient.ts            ← Gemini API call + Malayalam prompt
 lib/automation/unsplash.ts               ← fetches a matching real photo from Unsplash
 lib/automation/runDailyGeneration.ts     ← ഒരു run-ന്റെ പൂർണ്ണ logic (generate → dedupe → insert → log)
 lib/supabase/admin.ts                    ← service-role Supabase client (server-only)
@@ -41,7 +41,7 @@ Supabase Dashboard → SQL Editor → New query → `supabase/automation-setup.s
 
 ## Step 2 — API keys എടുക്കുക
 
-**Anthropic (article text):** https://console.anthropic.com → API Keys → Create Key.
+**Google Gemini (article text, free):** https://aistudio.google.com/apikey → Google account-ൽ sign in ചെയ്യുക → **"Create API key"** → key copy ചെയ്യുക. Card വേണ്ട, ദിവസം ഒരു article-ന് ഇത് free tier-ൽ ധാരാളം മതി. (ഒരു ചെറിയ കാര്യം: free tier-ൽ Google-ന്റെ terms അനുസരിച്ച് നിങ്ങൾ അയക്കുന്ന prompts/outputs അവരുടെ models improve ചെയ്യാൻ ഉപയോഗിച്ചേക്കാം — ഇവിടെ content പൊതുവെ publish ചെയ്യാൻ ഉള്ളത് തന്നെ ആയതിനാൽ പ്രശ്നമില്ല.)
 
 **Unsplash (article photo, optional but recommended):** https://unsplash.com/oauth/applications → "New Application" → free "Demo" app (per-hour limit 50 requests, ഈ use-case-ന് ധാരാളം) → **Access Key** copy ചെയ്യുക. ഇത് skip ചെയ്താലും system work ചെയ്യും — photo-ക്ക് പകരം icon (💼) കാണിക്കും.
 
@@ -52,7 +52,7 @@ Supabase Dashboard → SQL Editor → New query → `supabase/automation-setup.s
 | Name | Value |
 |---|---|
 | `SUPABASE_SERVICE_ROLE_KEY` | Supabase → Settings → API → `service_role` key (secret, anon key അല്ല) |
-| `ANTHROPIC_API_KEY` | Step 2-ൽ എടുത്ത Anthropic key |
+| `GEMINI_API_KEY` | Step 2-ൽ എടുത്ത Gemini key |
 | `UNSPLASH_ACCESS_KEY` | Step 2-ൽ എടുത്ത Unsplash key (optional) |
 | `CRON_SECRET` | ഏതെങ്കിലും random നീണ്ട string സ്വയം ഉണ്ടാക്കുക (e.g. terminal-ൽ `openssl rand -hex 32`) |
 
@@ -87,6 +87,6 @@ Vercel-ന്റെ **Hobby (free) plan**-ൽ ഒരു cron job-ന് ദി�
 
 ## Security
 
-- `ANTHROPIC_API_KEY`, `SUPABASE_SERVICE_ROLE_KEY` എന്നിവ ഒരിക്കലും browser-ലേക്ക് അയക്കുന്നില്ല — cron route (`app/api/cron/...`) ഉം `lib/automation/*` ഉം server-only code ആണ്.
+- `GEMINI_API_KEY`, `SUPABASE_SERVICE_ROLE_KEY` എന്നിവ ഒരിക്കലും browser-ലേക്ക് അയക്കുന്നില്ല — cron route (`app/api/cron/...`) ഉം `lib/automation/*` ഉം server-only code ആണ്.
 - Cron endpoint `CRON_SECRET` വഴി protect ചെയ്തിട്ടുണ്ട് — Vercel-ന്റെ സ്വന്തം cron invocations-ന് മാത്രമേ ഇത് work ചെയ്യൂ, പുറത്ത് നിന്ന് ആർക്കും ഈ URL hit ചെയ്ത് article generate ചെയ്യിക്കാൻ പറ്റില്ല.
 - Unsplash-ന്റെ API Guidelines അനുസരിച്ച് ഓരോ photo-യ്ക്കും ഫോട്ടോഗ്രാഫറുടെ പേര് ചെറുതായി credit ചെയ്യണം — idea page-ൽ image-ന് താഴെ ചെറിയ "Photo by ... on Unsplash" caption ഇതിനായി automatic ആയി കാണിക്കും (manual ആയി ചേർത്ത ideas-നെ ഇത് ബാധിക്കില്ല, image_credit_name null ആയതിനാൽ caption കാണിക്കില്ല).
