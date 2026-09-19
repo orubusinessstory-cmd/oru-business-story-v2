@@ -1,0 +1,74 @@
+.automation-status-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.automation-status-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 15px;
+}
+
+.automation-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+}
+.automation-dot.on {
+  background: #16a34a;
+  box-shadow: 0 0 0 4px #dcfce7;
+}
+.automation-dot.off {
+  background: #9ca3af;
+  box-shadow: 0 0 0 4px #f3f4f6;
+}
+
+.automation-toggle-buttons {
+  display: flex;
+  gap: 10px;
+}
+.automation-toggle-buttons button[disabled] {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+.automation-btn-inactive {
+  background: #93c5fd;
+}
+
+.automation-last-article {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.automation-last-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: #111827;
+}
+
+.automation-status-badge {
+  font-size: 11.5px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 20px;
+  white-space: nowrap;
+}
+.automation-status-badge.success {
+  background: #dcfce7;
+  color: #16a34a;
+}
+.automation-status-badge.failed {
+  background: #fee2e2;
+  color: #dc2626;
+}
+.automation-status-badge.skipped {
+  background: #f3f4f6;
+  color: #6b7280;
+}

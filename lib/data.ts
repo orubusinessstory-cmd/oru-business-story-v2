@@ -19,6 +19,8 @@ export type BusinessIdea = {
   investmentRange: string;
   icon: string;
   imageUrl?: string | null;
+  imageCreditName?: string | null;
+  imageCreditUrl?: string | null;
   featured?: boolean;
   content: string;
   relatedVideoUrl?: string | null;
@@ -44,6 +46,8 @@ function mapIdea(row: any): BusinessIdea {
     investmentRange: row.investment_range,
     icon: row.icon,
     imageUrl: row.image_url,
+    imageCreditName: row.image_credit_name,
+    imageCreditUrl: row.image_credit_url,
     featured: row.featured,
     content: row.content,
     relatedVideoUrl: row.related_video_url,

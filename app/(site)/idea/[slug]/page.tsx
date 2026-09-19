@@ -26,7 +26,22 @@ export default async function IdeaPage({ params }: { params: { slug: string } })
         <FavoriteButton slug={idea.slug} className="bookmark bookmark-article" />
         <IdeaShareButton slug={idea.slug} title={idea.title} />
         {idea.imageUrl ? (
-          <div className="article-hero-image" style={{ backgroundImage: `url(${idea.imageUrl})` }} />
+          <>
+            <div className="article-hero-image" style={{ backgroundImage: `url(${idea.imageUrl})` }} />
+            {idea.imageCreditName && (
+              <p style={{ fontSize: 11, color: "#9ca3af", textAlign: "right", margin: "4px 0 0" }}>
+                Photo by{" "}
+                {idea.imageCreditUrl ? (
+                  <a href={idea.imageCreditUrl} target="_blank" rel="noopener noreferrer" style={{ color: "#9ca3af" }}>
+                    {idea.imageCreditName}
+                  </a>
+                ) : (
+                  idea.imageCreditName
+                )}{" "}
+                on Unsplash
+              </p>
+            )}
+          </>
         ) : (
           <div className="article-hero-icon">{idea.icon}</div>
         )}

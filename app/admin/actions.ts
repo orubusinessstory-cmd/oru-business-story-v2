@@ -3,6 +3,8 @@
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
+import { slugify } from "@/lib/slugify";
+import { runDailyGeneration } from "@/lib/automation/runDailyGeneration";
 
 // ---------- Auth ----------
 
@@ -55,16 +57,6 @@ export async function deleteCategory(slug: string) {
 }
 
 // ---------- Business ideas ----------
-
-function slugify(text: string): string {
-  return text
-    .toLowerCase()
-    .trim()
-    .replace(/[^a-z0-9\s-]/g, "")
-    .replace(/\s+/g, "-")
-    .replace(/-+/g, "-")
-    .replace(/^-|-$/g, "");
-}
 
 async function uploadIdeaImage(supabase: any, slug: string, file: File): Promise<string | null> {
   if (!file || file.size === 0) return null;
@@ -221,4 +213,45 @@ export async function removeAdminUser(id: string) {
   if (error) throw new Error(error.message);
 
   revalidatePath("/admin/users");
+}
+
+// ---------- Automatic Daily Business Content ----------
+
+export async function setAutomationEnabled(enabled: boolean) {
+  const supabase = createClient();
+  const { error } = await supabase
+    .from("automation_settings")
+    .update({ is_enabled: enabled, updated_at: new Date().toISOString() })
+    .eq("id", 1);
+  if (error) throw new Error(error.message);
+
+  revalidatePath("/admin/automation");
+}
+
+export async function updateAutomationPublishTime(formData: FormData) {
+  const supabase = createClient();
+  const publishTime = String(formData.get("publish_time") || "").trim();
+  if (!/^\d{2}:\d{2}$/.test(publishTime)) {
+    throw new Error("Publishing time must be in HH:MM format.");
+  }
+
+  const { error } = await supabase
+    .from("automation_settings")
+    .update({ publish_time: publishTime, updated_at: new Date().toISOString() })
+    .eq("id", 1);
+  if (error) throw new Error(error.message);
+
+  revalidatePath("/admin/automation");
+}
+
+export async function runAutomationNow() {
+  const result = await runDailyGeneration(true);
+
+  revalidatePath("/admin/automation");
+  if (result.status === "success") {
+    revalidatePath("/");
+    revalidatePath("/categories");
+  }
+
+  return result;
 }
