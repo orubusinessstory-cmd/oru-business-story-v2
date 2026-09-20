@@ -79,12 +79,39 @@ function extractJson(raw: string): unknown {
   // Strip a ```json ... ``` fence if the model added one anyway.
   const fenceMatch = text.match(/```(?:json)?\s*([\s\S]*?)```/i);
   if (fenceMatch) text = fenceMatch[1].trim();
+
   const start = text.indexOf("{");
-  const end = text.lastIndexOf("}");
-  if (start === -1 || end === -1 || end < start) {
+  if (start === -1) {
     throw new Error("Gemini response did not contain a JSON object.");
   }
-  return JSON.parse(text.slice(start, end + 1));
+
+  // Scan forward from the first "{", tracking string state and brace depth,
+  // and stop at the FIRST complete JSON object — ignoring anything after it
+  // (e.g. Gemini occasionally appends extra "thinking" text past the JSON,
+  // which broke a naive indexOf("{")..lastIndexOf("}") extraction).
+  let depth = 0;
+  let inString = false;
+  let escaped = false;
+  for (let i = start; i < text.length; i++) {
+    const ch = text[i];
+    if (inString) {
+      if (escaped) escaped = false;
+      else if (ch === "\\") escaped = true;
+      else if (ch === '"') inString = false;
+      continue;
+    }
+    if (ch === '"') {
+      inString = true;
+    } else if (ch === "{") {
+      depth++;
+    } else if (ch === "}") {
+      depth--;
+      if (depth === 0) {
+        return JSON.parse(text.slice(start, i + 1));
+      }
+    }
+  }
+  throw new Error("Gemini response JSON object was never closed.");
 }
 
 function validate(parsed: any): GeneratedArticle {
@@ -135,8 +162,9 @@ async function callGemini(system: string, user: string): Promise<string> {
       contents: [{ role: "user", parts: [{ text: user }] }],
       systemInstruction: { parts: [{ text: system }] },
       generationConfig: {
-        maxOutputTokens: 4096,
+        maxOutputTokens: 8192,
         responseMimeType: "application/json",
+        thinkingConfig: { thinkingBudget: 0 },
       },
     }),
   });
@@ -147,7 +175,11 @@ async function callGemini(system: string, user: string): Promise<string> {
   }
 
   const data = await response.json();
-  const text = data?.candidates?.[0]?.content?.parts?.map((p: any) => p.text ?? "").join("\n") ?? "";
+  const parts = data?.candidates?.[0]?.content?.parts ?? [];
+  const text = parts
+    .filter((p: any) => !p.thought) // skip any internal "thinking" part, keep only the actual answer
+    .map((p: any) => p.text ?? "")
+    .join("\n");
 
   if (!text.trim()) {
     const finishReason = data?.candidates?.[0]?.finishReason;
