@@ -9,6 +9,9 @@ export default function LoginPage() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [forgotMode, setForgotMode] = useState(false);
+  const [forgotMessage, setForgotMessage] = useState("");
+  const [forgotLoading, setForgotLoading] = useState(false);
   const router = useRouter();
 
   async function handleSubmit(e: React.FormEvent) {
@@ -28,6 +31,59 @@ export default function LoginPage() {
 
     router.push("/admin");
     router.refresh();
+  }
+
+  async function handleForgotPassword(e: React.FormEvent) {
+    e.preventDefault();
+    setForgotLoading(true);
+    setForgotMessage("");
+
+    const supabase = createClient();
+    const { error } = await supabase.auth.resetPasswordForEmail(email, {
+      redirectTo: `${window.location.origin}/admin/reset-password`,
+    });
+
+    setForgotLoading(false);
+    setForgotMessage(
+      error ? error.message : "Password reset link അയച്ചു — email inbox (spam-ഉം) നോക്കുക."
+    );
+  }
+
+  if (forgotMode) {
+    return (
+      <div className="admin-login-wrap">
+        <form className="admin-login-card" onSubmit={handleForgotPassword}>
+          <h1>Oru Business Story</h1>
+          <p className="admin-login-sub">Reset password</p>
+
+          <label>Email</label>
+          <input
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+            autoComplete="email"
+          />
+
+          {forgotMessage && <p className="admin-hint">{forgotMessage}</p>}
+
+          <button type="submit" disabled={forgotLoading} className="admin-btn-primary">
+            {forgotLoading ? "Sending..." : "Send reset link"}
+          </button>
+          <button
+            type="button"
+            className="admin-btn-secondary"
+            style={{ marginTop: 10 }}
+            onClick={() => {
+              setForgotMode(false);
+              setForgotMessage("");
+            }}
+          >
+            ← Back to sign in
+          </button>
+        </form>
+      </div>
+    );
   }
 
   return (
@@ -58,6 +114,16 @@ export default function LoginPage() {
 
         <button type="submit" disabled={loading} className="admin-btn-primary">
           {loading ? "Signing in..." : "Sign in"}
+        </button>
+        <button
+          type="button"
+          className="admin-forgot-link"
+          onClick={() => {
+            setForgotMode(true);
+            setError("");
+          }}
+        >
+          Forgot password?
         </button>
       </form>
     </div>

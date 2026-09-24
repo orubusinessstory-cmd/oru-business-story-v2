@@ -186,6 +186,16 @@ export async function updateVideo(id: string, formData: FormData) {
   redirect("/admin/videos");
 }
 
+export async function syncVideosNow() {
+  const { syncYouTubeVideos } = await import("@/lib/automation/syncVideos");
+  const result = await syncYouTubeVideos();
+
+  revalidatePath("/admin/videos");
+  if (result.added > 0) revalidatePath("/videos");
+
+  return result;
+}
+
 export async function deleteVideo(id: string) {
   const supabase = createClient();
   const { error } = await supabase.from("videos").delete().eq("id", id);

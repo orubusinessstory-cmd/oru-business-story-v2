@@ -1,0 +1,130 @@
+.reactions-panel {
+  margin-top: 28px;
+  padding-top: 20px;
+  border-top: 1px solid #eef0f2;
+}
+
+.reactions-buttons {
+  display: flex;
+  gap: 10px;
+}
+.reaction-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid #e5e7eb;
+  background: #fff;
+  border-radius: 20px;
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #374151;
+  cursor: pointer;
+}
+.reaction-btn:disabled {
+  opacity: 0.6;
+}
+.reaction-btn.active-like {
+  background: #dcfce7;
+  border-color: #86efac;
+  color: #16a34a;
+}
+.reaction-btn.active-dislike {
+  background: #fee2e2;
+  border-color: #fca5a5;
+  color: #dc2626;
+}
+
+.reactions-notice {
+  font-size: 13px;
+  color: #6b7280;
+  margin: 10px 0 0;
+}
+.reactions-notice a {
+  color: #2563eb;
+  font-weight: 600;
+}
+
+.reactions-comments-title {
+  margin: 22px 0 10px;
+  font-size: 16px;
+}
+
+.reactions-comment-form {
+  display: flex;
+  gap: 10px;
+  align-items: flex-end;
+  margin-bottom: 16px;
+}
+.reactions-comment-form textarea {
+  flex: 1;
+  border: 1px solid #d1d5db;
+  border-radius: 10px;
+  padding: 10px 12px;
+  font-size: 14px;
+  font-family: inherit;
+  resize: none;
+}
+.reactions-comment-form textarea:disabled {
+  background: #f9fafb;
+  color: #9ca3af;
+}
+.reactions-post-btn {
+  background: #2563eb;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 18px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.reactions-post-btn:disabled {
+  background: #93c5fd;
+  cursor: not-allowed;
+}
+
+.reactions-comment-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.reactions-empty {
+  color: #9ca3af;
+  font-size: 14px;
+}
+.reactions-comment {
+  border: 1px solid #eef0f2;
+  border-radius: 10px;
+  padding: 10px 14px;
+}
+.reactions-comment-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 4px;
+}
+.reactions-comment-author {
+  font-weight: 700;
+  font-size: 13.5px;
+  color: #111827;
+}
+.reactions-comment-time {
+  font-size: 12px;
+  color: #9ca3af;
+}
+.reactions-comment-text {
+  font-size: 14px;
+  color: #374151;
+  margin: 0;
+  line-height: 1.5;
+}
+.reactions-comment-delete {
+  background: none;
+  border: none;
+  color: #dc2626;
+  font-size: 12px;
+  padding: 6px 0 0;
+  cursor: pointer;
+}

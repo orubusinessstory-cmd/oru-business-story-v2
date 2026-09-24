@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
-import { deleteVideo } from "../actions";
+import { deleteVideo, syncVideosNow } from "../actions";
+import SyncVideosButton from "./SyncVideosButton";
 
 export const dynamic = "force-dynamic";
 
@@ -17,9 +18,14 @@ export default async function AdminVideosPage() {
             Manage the videos shown in the Videos tab on the site.
           </p>
         </div>
-        <a href="/admin/videos/new" className="admin-btn-primary">
-          + Add Video
-        </a>
+        <div style={{ display: "flex", gap: 10 }}>
+          <form action={syncVideosNow}>
+            <SyncVideosButton />
+          </form>
+          <a href="/admin/videos/new" className="admin-btn-primary">
+            + Add Video
+          </a>
+        </div>
       </div>
 
       {!videos || videos.length === 0 ? (

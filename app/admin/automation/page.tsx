@@ -2,6 +2,7 @@ import "./automation.css";
 import { createClient } from "@/lib/supabase/server";
 import { AUTOMATION_CATEGORIES } from "@/lib/automation/categories";
 import { setAutomationEnabled, updateAutomationPublishTime, runAutomationNow } from "../actions";
+import GenerateNowButton from "./GenerateNowButton";
 
 export const dynamic = "force-dynamic";
 
@@ -134,15 +135,8 @@ export default async function AutomationPage() {
       <div className="admin-card">
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 4 }}>
           <h3 style={{ margin: 0 }}>Automation History</h3>
-          <form
-            action={async () => {
-              "use server";
-              await runAutomationNow();
-            }}
-          >
-            <button type="submit" className="admin-btn-secondary">
-              Generate Now (test)
-            </button>
+          <form action={runAutomationNow}>
+            <GenerateNowButton />
           </form>
         </div>
         <p className="admin-hint" style={{ marginTop: -2, marginBottom: 14 }}>

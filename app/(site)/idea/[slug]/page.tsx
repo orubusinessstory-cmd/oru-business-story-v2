@@ -4,6 +4,8 @@ import remarkGfm from "remark-gfm";
 import { BottomNav, PageHero } from "@/components/Layout";
 import FavoriteButton from "@/components/FavoriteButton";
 import IdeaShareButton from "@/components/IdeaShareButton";
+import ReactionsPanel from "./ReactionsPanel";
+import "./reactions.css";
 import { getAllIdeaSlugs, getCategoryBySlug, getIdeaBySlug } from "@/lib/data";
 
 export const revalidate = 0;
@@ -72,6 +74,7 @@ export default async function IdeaPage({ params }: { params: { slug: string } })
             </a>
           </div>
         )}
+        <ReactionsPanel ideaSlug={idea.slug} />
       </div>
       <BottomNav active="Categories" />
     </>

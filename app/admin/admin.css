@@ -284,6 +284,19 @@
   font-size: 13px;
   margin: 0;
 }
+.admin-forgot-link {
+  background: none;
+  border: none;
+  color: #2563eb;
+  font-size: 13px;
+  text-align: center;
+  margin-top: 4px;
+  cursor: pointer;
+  padding: 6px;
+}
+.admin-forgot-link:hover {
+  text-decoration: underline;
+}
 
 .admin-empty {
   color: #9ca3af;

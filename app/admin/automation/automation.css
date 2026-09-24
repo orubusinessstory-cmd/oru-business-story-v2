@@ -72,3 +72,20 @@
   background: #f3f4f6;
   color: #6b7280;
 }
+
+.automation-running {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+.automation-spinner {
+  width: 12px;
+  height: 12px;
+  border: 2px solid #cbd5e1;
+  border-top-color: #2563eb;
+  border-radius: 50%;
+  animation: automation-spin 0.7s linear infinite;
+}
+@keyframes automation-spin {
+  to { transform: rotate(360deg); }
+}

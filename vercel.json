@@ -3,6 +3,10 @@
     {
       "path": "/api/cron/generate-article",
       "schedule": "30 3 * * *"
+    },
+    {
+      "path": "/api/cron/sync-videos",
+      "schedule": "0 5 * * *"
     }
   ]
 }
